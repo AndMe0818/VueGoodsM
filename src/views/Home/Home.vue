@@ -1,13 +1,13 @@
 <template>
     <div>
-        <h2>很大声</h2>
+        home
     </div>
 </template>
 
 <script>
 export default {
-    name: 'Pome',
-   
+    name: 'Home',
+    
     data() {
         return {
             
@@ -22,6 +22,6 @@ export default {
 };
 </script>
 
-<style  scoped>
+<style lang="scss" scoped>
 
 </style>
