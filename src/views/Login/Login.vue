@@ -84,6 +84,10 @@ export default {
             return this.$message.warning("登录失败请检查后登录");
           }
           this.$message.success("登陆成功");
+          // 1.登录成功后 服务器返回了一个token  保存在客户端的sessionstoryage中
+                // 1.1 项目中除了登录意外的其他api接口 都必须在登录之后才能访问
+                // 1.2 token 只又在当前网站打开期间才生效，所以才储存在 sessionstorage中
+          // 2.通过路由拦截完成
           window.sessionStorage.setItem('token',res.data.token)
           this.$router.push('/home')
         });
