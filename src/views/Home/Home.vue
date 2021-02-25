@@ -11,13 +11,15 @@
     <!-- 页面主题 -->
     <el-container>
       <!-- 侧边栏 -->
-      <el-aside :width=" isToggle ?  '64px' : '200px' ">
+      <el-aside :width="isToggle ? '64px' : '200px'">
         <!-- 折叠展开区 -->
         <div class="toggle-button" @click="toogleCollapse">|||</div>
         <!-- 侧边栏菜单区域 -->
         <el-menu
-          :collapse ="isToggle"
-          :collapse-transition ="false"
+          :default-active="$route.path"
+          router
+          :collapse="isToggle"
+          :collapse-transition="false"
           :unique-opened="true"
           background-color="#353d55"
           text-color="#fff"
@@ -39,7 +41,7 @@
             </template>
             <!-- 2级菜单 -->
             <el-menu-item
-              :index="children.id + ''"
+              :index="'/' + children.path"
               v-for="(children, indez) in item.children"
               :key="indez"
             >
@@ -52,7 +54,12 @@
         </el-menu>
       </el-aside>
       <!-- 主体 -->
-      <el-main>Main</el-main>
+      <el-main>
+        <!-- 路由占位符 -->
+        
+        <router-view></router-view>
+        
+      </el-main>
     </el-container>
   </el-container>
 </template>
@@ -64,13 +71,13 @@ export default {
     return {
       menulist: [], //组件菜单数据
       iconObj: {
-        '125': 'iconfont icon-user',
-        '103': 'iconfont icon-tijikongjian',
-        '101': 'iconfont icon-shangpin',
-        '102': 'iconfont icon-danju',
-        '145': 'iconfont icon-baobiao', 
+        125: 'iconfont icon-user',
+        103: 'iconfont icon-tijikongjian',
+        101: 'iconfont icon-shangpin',
+        102: 'iconfont icon-danju',
+        145: 'iconfont icon-baobiao',
       },
-      isToggle:false,
+      isToggle: false,
     }
   },
   created() {
@@ -83,6 +90,7 @@ export default {
       window.sessionStorage.clear()
       this.$router.push('/login')
     },
+
     // 获取 menu列表
     getMenuList() {
       this.$http({ url: '/menus' }).then((res) => {
@@ -92,9 +100,9 @@ export default {
       })
     },
     // 折叠收起菜单
-    toogleCollapse(){
+    toogleCollapse() {
       this.isToggle = !this.isToggle
-    }
+    },
   },
 }
 </script>
@@ -128,20 +136,20 @@ export default {
 }
 .el-aside {
   background-color: #353d55;
-  .el-menu{
+  .el-menu {
     border: none;
-   }
+  }
 }
-.iconfont{
-  margin-right: 10px ;
+.iconfont {
+  margin-right: 10px;
 }
 
 .el-main {
   background-color: #eaedf1;
 }
 
-.toggle-button{
-  background-color:#525f86;
+.toggle-button {
+  background-color: #525f86;
   color: #fff;
   text-align: center;
   line-height: 24px;
