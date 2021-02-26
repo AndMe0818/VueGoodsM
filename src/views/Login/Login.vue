@@ -75,7 +75,7 @@ export default {
         if (!valid) return;
         // 调用网络请求
         this.$http({
-          methods: "post",
+          method: "post",
           url: "/login",
           params: this.loginForm,
         }).then((res) => {
