@@ -77,7 +77,7 @@ export default {
         this.$http({
           method: "post",
           url: "/login",
-          params: this.loginForm,
+          data: this.loginForm,
         }).then((res) => {
           console.log(res);
           if (res.meta.status !== 200) {

@@ -94,7 +94,7 @@ export default {
     // 获取 menu列表
     getMenuList() {
       this.$http({ url: '/menus' }).then((res) => {
-        console.log(res)
+        // console.log(res)
         if (res.meta.status !== 200) return this.$message.error(res.meta.msg)
         this.menulist = res.data
       })
