@@ -5,6 +5,7 @@ import store from './store'
 import './plugins/element.js'
 import './assets/css/base.css'
 import './assets/fonts/iconfont.css'
+import './assets/css/golbole.css'
 
 import axios from './network/axios'
 
