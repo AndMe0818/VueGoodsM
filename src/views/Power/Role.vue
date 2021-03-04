@@ -74,7 +74,7 @@
         <el-table-column prop="roleName" label="角色名称" />
         <el-table-column prop="roleDesc" label="角色描述" />
         <!-- 操作列 -->
-        <el-table-column label="操作">
+        <el-table-column label="操作" width="370px">
           <template v-slot="scoped">
             <el-button
               @click="editRole(scoped.row.id)"

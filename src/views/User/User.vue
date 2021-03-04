@@ -89,7 +89,12 @@
               content="分配角色"
               placement="top"
             >
-              <el-button type="warning" icon="el-icon-setting" size="mini" />
+              <el-button
+                @click="setRole(slotscope.row)"
+                type="warning"
+                icon="el-icon-setting"
+                size="mini"
+              />
             </el-tooltip>
           </template>
         </el-table-column>
@@ -167,6 +172,34 @@
         <span slot="footer" class="dialog-footer">
           <el-button @click="editDialogVisible = false">取 消</el-button>
           <el-button type="primary" @click="editUserInfo"> 确 定 </el-button>
+        </span>
+      </el-dialog>
+      <!-- 分配角色对话框 -->
+      <el-dialog
+        @close="setRoleDialogClosed"
+        title="分配角色"
+        :visible.sync="setRoleDialogVisible"
+        width="50%"
+      >
+        <div>
+          <P>当前的用户：{{ userInfo.username }}</P>
+          <P>当前的角色：{{ userInfo.role_name }}</P>
+          <p class="select">
+            分配新角色：
+            <el-select v-model="selectedId" placeholder="请选择">
+              <el-option
+                v-for="item in rolesList"
+                :key="item.id"
+                :label="item.roleName"
+                :value="item.id"
+              >
+              </el-option>
+            </el-select>
+          </p>
+        </div>
+        <span slot="footer" class="dialog-footer">
+          <el-button @click="setRoleDialogVisible = false">取 消</el-button>
+          <el-button type="primary" @click="seaveRoleInfo">确 定</el-button>
         </span>
       </el-dialog>
     </el-card>
@@ -262,6 +295,14 @@ export default {
       editDialogVisible: false,
       // 用户编辑 表单参数
       editForm: {},
+      // 控制分配角色对话框 显示与隐藏
+      setRoleDialogVisible: false,
+      // 需要被分配角色的用户信息
+      userInfo: {},
+      // 所有角色的数据列表
+      rolesList: [],
+      // 已选择的角色id值
+      selectedId: '',
     }
   },
   created() {
@@ -361,7 +402,6 @@ export default {
             mobile: this.editForm.mobile,
           },
         }).then((res) => {
-          
           if (res.meta.status !== 200) {
             return this.$message.error('更新用户信息失败')
           }
@@ -374,7 +414,6 @@ export default {
       })
     },
     // 删除操作
-
     removeUserByID(id) {
       this.$confirm('此操作将永久删除该用户, 是否继续?', '提示', {
         confirmButtonText: '确定',
@@ -386,22 +425,66 @@ export default {
           // 捕捉到 用户点击 确定删除  res为 confirm
           this.$http({ method: 'delete', url: '/users/' + id }).then((res) => {
             console.log(res)
-            if(res.meta.status !==200){
+            if (res.meta.status !== 200) {
               return this.$message.error('删除用户失败')
             }
             this.$message.success('删除用户成功')
             this.getUserList()
-            
           })
         })
         .catch(() => {
           this.$message.info('已取消删除')
-          
         })
     },
+    // 展示分配角色的对话框
+    setRole(userInfo) {
+      this.userInfo = userInfo
+      this.$http({ url: '/roles' }).then((res) => {
+        console.log(res)
+        if (res.meta.status !== 200) {
+          return this.$message.error('获取角色列表失败')
+        }
+
+        this.rolesList = res.data
+        console.log(this.rolesList)
+        return this.$message.success('获取角色列表成功')
+      })
+
+      this.setRoleDialogVisible = true
+    },
+    // 点击确定按钮 分配角色
+
+    seaveRoleInfo() {
+      if (!this.selectedId) {
+        return this.$message.error('请选中要分配的角色！')
+      }
+      this.$http({
+        method: 'put',
+        url: '/users/' + this.userInfo.id + '/role',
+        data: { rid: this.selectedId },
+      }).then((res) => {
+        console.log(res)
+        if (res.meta.status !== 200) {
+          return this.$message.error('更新角色失败')
+        }
+        this.$message.success('更新角色成功')
+        this.getUserList()
+        this.setRoleDialogVisible = false
+      })
+    },
+    // 监听分配角色对话框关闭事件
+    setRoleDialogClosed(){
+      this.selectedId = ''
+      this.userInfo = {}
+    }
   },
 }
 </script>
 <style scoped>
-
+p {
+  margin-bottom: 10px;
+}
+.select {
+  margin-top: 10px;
+}
 </style>
