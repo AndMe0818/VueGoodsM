@@ -6,8 +6,13 @@ import './plugins/element.js'
 import './assets/css/base.css'
 import './assets/fonts/iconfont.css'
 import './assets/css/golbole.css'
-
 import axios from './network/axios'
+
+// 引入 table-tree插件
+import TreeTable from 'vue-table-with-tree-grid'
+// 注册全局组件
+Vue.component('tree-table',TreeTable);
+
 
 Vue.prototype.$http = axios
 
