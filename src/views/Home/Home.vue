@@ -14,7 +14,7 @@
       <el-aside :width="isToggle ? '64px' : '200px'">
         <!-- 折叠展开区 -->
         <div class="toggle-button" @click="toogleCollapse">|||</div>
-        <!-- 侧边栏菜单区域 -->
+        <!-- 侧边栏菜单区域  router 启用 vuerouter模式 以menuitem的 index 会作为路由地址-->
         <el-menu
           :default-active="$route.path"
           router
@@ -56,9 +56,8 @@
       <!-- 主体 -->
       <el-main>
         <!-- 路由占位符 -->
-        
+
         <router-view></router-view>
-        
       </el-main>
     </el-container>
   </el-container>

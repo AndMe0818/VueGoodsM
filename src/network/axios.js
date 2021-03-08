@@ -21,7 +21,7 @@ export default function axios(option) {
         // config.data = qs.stringify(config.data)
 
         config.headers.Authorization = window.sessionStorage.getItem('token')
-        console.log(config)
+        // console.log(config)
         // 4.等等
         return config
       },
