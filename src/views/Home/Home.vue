@@ -16,7 +16,7 @@
         <div class="toggle-button" @click="toogleCollapse">|||</div>
         <!-- 侧边栏菜单区域  router 启用 vuerouter模式 以menuitem的 index 会作为路由地址-->
         <el-menu
-          :default-active="$route.path"
+          :default-active="this.$router.path"
           router
           :collapse="isToggle"
           :collapse-transition="false"
