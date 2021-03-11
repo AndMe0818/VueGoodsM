@@ -67,6 +67,16 @@
       <el-table-column type="index"></el-table-column>
       <el-table-column label=""></el-table-column>
     </el-table>
+    <!-- 分页区域 -->
+    <el-pagination
+      @size-change="handleSizeChange"
+      @current-change="handleCurrentChange"
+      :current-page="queryInfo.pagenum"
+      :page-sizes="[5, 10, 15, 20]"
+      :page-size="10"
+      layout="total, sizes, prev, pager, next, jumper"
+      :total="total">
+    </el-pagination>
   </div>
 </template>
 
