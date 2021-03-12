@@ -40,6 +40,7 @@ import {
   Upload,
   Timeline,
   TimelineItem,
+  Calendar
 } from 'element-ui'
 
 Vue.use(Form)
@@ -79,5 +80,6 @@ Vue.use(Checkbox)
 Vue.use(Upload);
 Vue.use(Timeline);
 Vue.use(TimelineItem);
+Vue.use(Calendar);
 Vue.prototype.$message = Message
 Vue.prototype.$confirm = MessageBox.confirm

@@ -13,7 +13,11 @@
       <!-- 侧边栏 -->
       <el-aside :width="isToggle ? '64px' : '200px'">
         <!-- 折叠展开区 -->
-        <div class="toggle-button" @click="toogleCollapse">|||</div>
+        <div class="toggle-button" @click="toogleCollapse">
+           <div v-if="isToggle" class="el-icon-d-arrow-right"></div>
+          <div v-else class="el-icon-d-arrow-left"></div>
+         
+        </div>
         <!-- 侧边栏菜单区域  router 启用 vuerouter模式 以menuitem的 index 会作为路由地址-->
         <el-menu
           :default-active="this.$router.path"
@@ -121,15 +125,15 @@ export default {
   > div {
     display: flex;
     align-items: center;
-    font-size: 18px;
+    font-size: 22px;
     font-weight: 700;
     img {
-      height: 60px;
+      height: 50px;
       background-color: rgb(71, 83, 107);
       border-radius: 50%;
       border: 1px solid #6b60b0;
       vertical-align: middle;
-      margin-right: 20px;
+      margin: 10px 20px;
     }
   }
 }

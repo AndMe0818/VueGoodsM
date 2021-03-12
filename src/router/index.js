@@ -1,17 +1,30 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import Login from '../views/Login/Login.vue'
-import Home from '../views/Home/Home.vue'
-import Welcome from '../views/Home/Welcome.vue'
-import User from '../views/User/User.vue'
-import Rights from '../views/Power/Right.vue'
-import Role from '../views/Power/Role.vue'
-import Cate from '../views/Goods/Cate.vue'
-import Params from '../views/Goods/Params.vue'
-import List from '../views/Goods/List.vue'
-import Add from '../views/Goods/Add.vue'
-import Order from '../views/Order/Order.vue'
-import Report from '../views/Report/Report.vue'
+// 组件
+// import Login from '../views/Login/Login.vue'
+const Login = () => import('../views/Login/Login.vue');
+// import Home from '../views/Home/Home.vue'
+const Home = () => import('../views/Home/Home.vue');
+// import Welcome from '../views/Home/Welcome.vue'
+const Welcome = () => import('../views/Home/Welcome.vue');
+// import User from '../views/User/User.vue'
+const User = () => import('../views/User/User.vue');
+// import Rights from '../views/Power/Right.vue'
+const Rights = () => import('../views/Power/Right.vue');
+// import Role from '../views/Power/Role.vue'
+const Role = () => import('../views/Power/Role.vue');
+// import Cate from '../views/Goods/Cate.vue'
+const Cate = () => import('../views/Goods/Cate.vue');
+// import Params from '../views/Goods/Params.vue'
+const Params = () => import('../views/Goods/Params.vue');
+// import List from '../views/Goods/List.vue'
+const List = () => import('../views/Goods/List.vue');
+// import Add from '../views/Goods/Add.vue'
+const Add = () => import('../views/Goods/Add.vue');
+// import Order from '../views/Order/Order.vue'
+const Order = () => import('../views/Order/Order.vue');
+// import Report from '../views/Report/Report.vue'
+const Report = () => import('../views/Report/Report.vue');
 
 Vue.use(VueRouter)
 
@@ -22,7 +35,7 @@ const routes = [
   {
     path: '/home',
     component: Home,
-    // redirect: '/welcome',
+    redirect: '/welcome',
     children: [
       { path: '/welcome', component: Welcome },
       { path: '/users', component: User },
